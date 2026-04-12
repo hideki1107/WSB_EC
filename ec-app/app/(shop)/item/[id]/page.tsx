@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+
 import { getProduct, products } from "../../../../lib/products";
 import { PageHeading } from "../../../components/PageHeading";
 
@@ -25,48 +30,41 @@ export default async function ItemDetailPage({ params }: Props) {
   return (
     <div>
       <PageHeading title={product.name} description={product.description} />
-      <div className="rounded-2xl border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900">
-        <dl className="grid gap-4 text-sm sm:grid-cols-2">
-          <div>
-            <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              価格（税込）
-            </dt>
-            <dd className="mt-1 text-lg font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">
-              {product.priceLabel}
-            </dd>
-          </div>
-          <div>
-            <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              カテゴリ
-            </dt>
-            <dd className="mt-1 font-medium text-zinc-900 dark:text-zinc-50">
-              {product.tag}
-            </dd>
-          </div>
-          <div className="sm:col-span-2">
-            <dt className="text-xs font-medium uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              商品ID
-            </dt>
-            <dd className="mt-1 font-mono text-xs text-zinc-600 dark:text-zinc-300">
-              {product.id}
-            </dd>
-          </div>
-        </dl>
-        <div className="mt-8 flex flex-col gap-3 border-t border-zinc-200 pt-6 dark:border-zinc-800 sm:flex-row">
-          <Link
-            href="/home"
-            className="inline-flex h-11 items-center justify-center rounded-xl border border-zinc-300 px-4 text-sm font-medium text-zinc-800 transition hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-100 dark:hover:bg-zinc-800"
-          >
-            一覧に戻る
-          </Link>
-          <Link
-            href="/checkout"
-            className="inline-flex h-11 flex-1 items-center justify-center rounded-xl bg-emerald-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-500"
-          >
-            会計へ進む
-          </Link>
-        </div>
-      </div>
+      <Card className="shadow-sm">
+        <CardContent className="space-y-6 pt-6">
+          <dl className="grid gap-6 text-sm sm:grid-cols-2">
+            <div>
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                価格（税込）
+              </dt>
+              <dd className="mt-2 text-lg font-semibold tabular-nums text-primary">
+                {product.priceLabel}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                カテゴリ
+              </dt>
+              <dd className="mt-2 font-medium text-foreground">{product.tag}</dd>
+            </div>
+            <div className="sm:col-span-2">
+              <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                商品ID
+              </dt>
+              <dd className="mt-2 font-mono text-xs text-muted-foreground">{product.id}</dd>
+            </div>
+          </dl>
+        </CardContent>
+        <Separator />
+        <CardFooter className="flex flex-col gap-3 pt-6 sm:flex-row sm:justify-end">
+          <Button variant="outline" className="w-full sm:w-auto" asChild>
+            <Link href="/home">一覧に戻る</Link>
+          </Button>
+          <Button className="w-full sm:ml-auto sm:w-auto sm:min-w-40" asChild>
+            <Link href="/checkout">会計へ進む</Link>
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 }
