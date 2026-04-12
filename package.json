@@ -1,0 +1,10 @@
+{
+  "name": "wsb-ec",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix ec-app",
+    "build": "npm run build --prefix ec-app",
+    "start": "npm run start --prefix ec-app",
+    "lint": "npm run lint --prefix ec-app"
+  }
+}
