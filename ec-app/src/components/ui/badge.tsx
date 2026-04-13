@@ -26,13 +26,12 @@ const badgeVariants = cva(
   }
 )
 
-function Badge({
-  className,
-  variant = "default",
-  asChild = false,
-  ...props
-}: React.ComponentProps<"span"> &
-  VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
+type BadgeProps = React.ComponentProps<"span"> &
+  VariantProps<typeof badgeVariants> & { asChild?: boolean }
+
+function Badge(props: BadgeProps) {
+  const { className, variant = "default", asChild = false, ...rest } = props
+
   const Comp = asChild ? Slot.Root : "span"
 
   return (
@@ -40,7 +39,7 @@ function Badge({
       data-slot="badge"
       data-variant={variant}
       className={cn(badgeVariants({ variant }), className)}
-      {...props}
+      {...rest}
     />
   )
 }

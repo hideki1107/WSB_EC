@@ -7,34 +7,35 @@ import { Dialog as DialogPrimitive } from "radix-ui"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
-function Dialog({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) {
+type DialogRootProps = React.ComponentProps<typeof DialogPrimitive.Root>
+
+function Dialog(props: DialogRootProps) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
 }
 
-function DialogTrigger({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
+type DialogTriggerProps = React.ComponentProps<typeof DialogPrimitive.Trigger>
+
+function DialogTrigger(props: DialogTriggerProps) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
-function DialogPortal({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
+type DialogPortalProps = React.ComponentProps<typeof DialogPrimitive.Portal>
+
+function DialogPortal(props: DialogPortalProps) {
   return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />
 }
 
-function DialogClose({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
+type DialogCloseProps = React.ComponentProps<typeof DialogPrimitive.Close>
+
+function DialogClose(props: DialogCloseProps) {
   return <DialogPrimitive.Close data-slot="dialog-close" {...props} />
 }
 
-function DialogOverlay({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+type DialogOverlayProps = React.ComponentProps<typeof DialogPrimitive.Overlay>
+
+function DialogOverlay(props: DialogOverlayProps) {
+  const { className, ...rest } = props
+
   return (
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
@@ -42,19 +43,18 @@ function DialogOverlay({
         "fixed inset-0 z-50 bg-black/50 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0",
         className
       )}
-      {...props}
+      {...rest}
     />
   )
 }
 
-function DialogContent({
-  className,
-  children,
-  showCloseButton = true,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content> & {
+type DialogContentProps = React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean
-}) {
+}
+
+function DialogContent(props: DialogContentProps) {
+  const { className, children, showCloseButton = true, ...rest } = props
+
   return (
     <DialogPortal data-slot="dialog-portal">
       <DialogOverlay />
@@ -64,7 +64,7 @@ function DialogContent({
           "fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border bg-background p-6 shadow-lg duration-200 outline-none data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 sm:max-w-lg",
           className
         )}
-        {...props}
+        {...rest}
       >
         {children}
         {showCloseButton && (
@@ -81,24 +81,27 @@ function DialogContent({
   )
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
+type DialogHeaderProps = React.ComponentProps<"div">
+
+function DialogHeader(props: DialogHeaderProps) {
+  const { className, ...rest } = props
+
   return (
     <div
       data-slot="dialog-header"
       className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
-      {...props}
+      {...rest}
     />
   )
 }
 
-function DialogFooter({
-  className,
-  showCloseButton = false,
-  children,
-  ...props
-}: React.ComponentProps<"div"> & {
+type DialogFooterProps = React.ComponentProps<"div"> & {
   showCloseButton?: boolean
-}) {
+}
+
+function DialogFooter(props: DialogFooterProps) {
+  const { className, showCloseButton = false, children, ...rest } = props
+
   return (
     <div
       data-slot="dialog-footer"
@@ -106,7 +109,7 @@ function DialogFooter({
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         className
       )}
-      {...props}
+      {...rest}
     >
       {children}
       {showCloseButton && (
@@ -118,28 +121,30 @@ function DialogFooter({
   )
 }
 
-function DialogTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Title>) {
+type DialogTitleProps = React.ComponentProps<typeof DialogPrimitive.Title>
+
+function DialogTitle(props: DialogTitleProps) {
+  const { className, ...rest } = props
+
   return (
     <DialogPrimitive.Title
       data-slot="dialog-title"
       className={cn("text-lg leading-none font-semibold", className)}
-      {...props}
+      {...rest}
     />
   )
 }
 
-function DialogDescription({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Description>) {
+type DialogDescriptionProps = React.ComponentProps<typeof DialogPrimitive.Description>
+
+function DialogDescription(props: DialogDescriptionProps) {
+  const { className, ...rest } = props
+
   return (
     <DialogPrimitive.Description
       data-slot="dialog-description"
       className={cn("text-sm text-muted-foreground", className)}
-      {...props}
+      {...rest}
     />
   )
 }

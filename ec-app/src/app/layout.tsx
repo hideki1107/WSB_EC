@@ -21,11 +21,13 @@ export const metadata: Metadata = {
   description: "WSBのOFFICIAL通販サイト。WSBのグッズやCDをお買い求めいただけます。",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+export default function RootLayout(props: RootLayoutProps) {
+  const { children } = props;
+
   return (
     <html
       lang="ja"

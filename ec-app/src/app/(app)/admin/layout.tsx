@@ -1,10 +1,12 @@
 import { AdminHeader } from "@/components/layouts/admin-header";
 
-export default function AdminLayout({
-  children,
-}: Readonly<{
+type AdminLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+export default function AdminLayout(props: AdminLayoutProps) {
+  const { children } = props;
+
   return (
     <div className="flex min-h-full flex-1 flex-col bg-muted/50">
       <AdminHeader />

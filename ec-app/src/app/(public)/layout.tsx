@@ -1,11 +1,13 @@
 import { SiteFooter } from "@/components/layouts/site-footer";
 import { SiteHeader } from "@/components/layouts/site-header";
 
-export default function PublicLayout({
-  children,
-}: Readonly<{
+type PublicLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+export default function PublicLayout(props: PublicLayoutProps) {
+  const { children } = props;
+
   return (
     <div className="flex min-h-full flex-1 flex-col bg-muted/30">
       <SiteHeader />

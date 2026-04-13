@@ -10,7 +10,9 @@ type ProductDetailScreenProps = {
   product: Product;
 };
 
-export function ProductDetailScreen({ product }: ProductDetailScreenProps) {
+export function ProductDetailScreen(props: ProductDetailScreenProps) {
+  const { product } = props;
+
   return (
     <div>
       <PageHeading title={product.name} description={product.description} />

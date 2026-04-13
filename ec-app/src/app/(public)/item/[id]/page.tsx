@@ -10,14 +10,16 @@ export async function generateStaticParams() {
   return products.map((p) => ({ id: p.id }));
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { params } = props;
   const { id } = await params;
   const product = getProduct(id);
   if (!product) return { title: "商品が見つかりません" };
   return { title: product.name };
 }
 
-export default async function ItemDetailPage({ params }: Props) {
+export default async function ItemDetailPage(props: Props) {
+  const { params } = props;
   const { id } = await params;
   const product = getProduct(id);
   if (!product) notFound();
